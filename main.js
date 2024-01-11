@@ -1,11 +1,24 @@
 const DOMSelectors = {
-    box: document.getElementById("box"),
+    box: document.getElementById("container"),
 
 };
 
 function getNumber(){
-    let number = Math.floor(Math.random() * 1000);
-    DOMSelectors.box.insertAdjacentHTML("afterbegin", `<h2>${number}</h2>`);
+    let numberA = Math.floor(Math.random() * 1000);
+    let numberB = Math.floor(Math.random() * 1000);
+    // console.log("what is", numberA, "+", numberB);
+
+    return {
+        numberA: numberA,
+        numberB: numberB,
+    }
 };
 
-getNumber();
+function getQuestion(){
+    let data = getNumber();
+    // console.log(data.numberA);
+
+    DOMSelectors.box.innerHTML(data);
+}
+
+getQuestion();
