@@ -18,7 +18,7 @@ function getQuestion(){
     let data = getNumber();
     // console.log(data.numberA);
 
-    DOMSelectors.box.innerHTML(data);
+    DOMSelectors.box.innerHTML("hello");
 }
 
 getQuestion();
