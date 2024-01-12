@@ -18,10 +18,9 @@ function getQuestion(){
     let data = getNumber();
     // console.log(data.numberA);
 
-    DOMSelectors.box.insertAdjacentHTML("hello");
+    DOMSelectors.box.insertAdjacentHTML("beforeend", `What is ${data.numberA} + ${data.numberB}`)
 }
 
-// getQuestion();
-DOMSelectors.box.innerHTML("hello");
+getQuestion();
 
 
