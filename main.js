@@ -18,7 +18,10 @@ function getQuestion(){
     let data = getNumber();
     // console.log(data.numberA);
 
-    DOMSelectors.box.innerHTML("hello");
+    DOMSelectors.box.insertAdjacentHTML("hello");
 }
 
-getQuestion();
+// getQuestion();
+DOMSelectors.box.innerHTML("hello");
+
+
