@@ -1,8 +1,8 @@
 const DOMSelectors = {
     box: document.getElementById("container"),
     submit: document.getElementById("submitBtn"),
-    submitQ: document.getElementById("questionBtn"),
-    submitQuestion: document.getElementById("questionNum"),
+    submitAmount: document.getElementById("submitAmount"),
+    numberOfQuestion: document.getElementById("numberOfQuestion"),
 };
 
 function getNumber(){
@@ -16,27 +16,36 @@ function getNumber(){
     }
 };
 
-function getQuestion(){
-    let data = getNumber();
+function display(data){
     // console.log(data.numberA);
+    DOMSelectors.box.insertAdjacentHTML("beforeend", `What is ${data.numberA} + ${data.numberB}`)
 
-    DOMSelectors.box.insertAdjacentHTML("afterbegin", `What is ${data.numberA} + ${data.numberB}`)
-
-    DOMSelectors.box.insertAdjacentHTML("afterend", ` 
-    <input type="text" id="answerInput" placeholder="Answer" data-answer=${data.numberA + data.numberB}>`);
+    DOMSelectors.box.insertAdjacentHTML("beforeend", ` 
+    <input type="text" id="answerInput" placeholder="Answer" data-answer=${data.numberA + data.numberB}> 
+    <br><br>`);
 };
 
-getQuestion()
-
-DOMSelectors.submitQ.addEventListener("click", function () {
-    numQ = DOMSelectors.submitQuestion.value
-
+DOMSelectors.submitAmount.addEventListener("click", function () {
+    numQ = DOMSelectors.numberOfQuestion.value
     DOMSelectors.box.innerHTML = ""
+
+    const questions = [];
+    
+
     for (let i = 0; i < numQ; i++){
-        getQuestion();
+        const num = getNumber();
+        questions.push(num);
     }
 
+    questions.forEach((question)=>{
+        display(question);
+    })
 });
+
+
+DOMSelectors.submit.addEventListener("click", function(){
+
+})
 
 
 
