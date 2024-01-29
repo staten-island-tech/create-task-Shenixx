@@ -3,20 +3,16 @@ const DOMSelectors = {
     submit: document.getElementById("submitBtn"),
     submitAmount: document.getElementById("submitAmount"),
     numberOfQuestion: document.getElementById("numberOfQuestion"),
-    answerInputABC: document.getElementById("answerInput")
+    answerInputs: document.getElementsByClassName("answerInput"),
 };
 
 const questions = [];
-const answers = [];
+const userAnswers = [];
 
 function getNumber(){
     let numberA = Math.floor(Math.random() * 1000);
     let numberB = Math.floor(Math.random() * 1000);
     // console.log("what is", numberA, "+", numberB);
-    
-    let answer = numberA + numberB
-    // console.log(answer)
-    answers.push(answer);
 
     return {
         numberA: numberA,
@@ -29,18 +25,14 @@ function display(data){
     DOMSelectors.box.insertAdjacentHTML("beforeend", `What is ${data.numberA} + ${data.numberB}`)
 
     DOMSelectors.box.insertAdjacentHTML("beforeend", ` 
-    <input type="text" id="answerInput" placeholder="Answer" data-answer=${data.numberA + data.numberB}> 
+    <input type="text" class="answerInput" placeholder="Answer" data-answer=${data.numberA + data.numberB}> 
     <br><br>`);
-    
-    console.log(DOMSelectors.answerInputABC)
 };
-
-
 
 
 DOMSelectors.submitAmount.addEventListener("click", function () {
     numOfQ = DOMSelectors.numberOfQuestion.value
-    DOMSelectors.box.innerHTML = ""
+    DOMSelectors.box.innerHTML = "";
 
     for (let i = 0; i < numOfQ; i++){
         const num = getNumber();
@@ -51,17 +43,18 @@ DOMSelectors.submitAmount.addEventListener("click", function () {
         display(question);
     })
     
-
-
-    return questions
+    return questions;
 });
 
 
-DOMSelectors.submit.addEventListener("click", function(){
+DOMSelectors.submit.addEventListener("click", function(){  
+    for (let i = 0; i < DOMSelectors.answerInputs.length; i++) {
+        let userAnswer = DOMSelectors.answerInputs[i].value;
+        userAnswers.push(userAnswer);
+    }
+
     console.log(questions);
-    console.log(answers)
-    
-    
+    console.log(userAnswers);
 })
 
 
