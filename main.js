@@ -9,13 +9,14 @@ const DOMSelectors = {
 
 const questions = [];
 const userAnswers = [];
-const answersB = [];
+const answerKey = [];
 
 function clearAll(){
-    userAnswers.length = 0
+    userAnswers.length = 0;
     questions.length = 0;
+    answerKey.length = 0;
     DOMSelectors.box.innerHTML = "";
-    DOMSelectors.result.innerHTML = ""
+    DOMSelectors.result.innerHTML = "";
 }
 
 function getNumber(){
@@ -33,7 +34,7 @@ function display(data){
     <input type="text" class="answerInput" placeholder="Answer"> 
     <br><br>`);
     let answers = data.numberA + data.numberB
-    answersB.push(Number(answers));
+    answerKey.push(Number(answers));
 };
 
 
@@ -41,7 +42,7 @@ DOMSelectors.submitAmount.addEventListener("click", function () {
     clearAll()
     numOfQ = DOMSelectors.numberOfQuestion.value;
     for (let i = 0; i < numOfQ; i++) {
-        const num = getNumber();
+        let num = getNumber();
         questions.push(num);
     }
     questions.forEach((question) => {
@@ -68,7 +69,8 @@ let checkAnswers = function (arr1, arr2, arr3) {
             );
         }
     }
-    DOMSelectors.result.insertAdjacentHTML("beforeend", `you got ${right} right and ${wrong} wrong`);
+    let percent = right/ (right + wrong) * 100
+    DOMSelectors.result.insertAdjacentHTML("beforeend", `You got ${right} right and ${wrong} wrong with ${percent}%`);
 };
 
 DOMSelectors.submit.addEventListener("click", function(){  
@@ -76,7 +78,6 @@ DOMSelectors.submit.addEventListener("click", function(){
     for (let i = 0; i < DOMSelectors.answerInputs.length; i++) {
         let userAnswer = DOMSelectors.answerInputs[i].value;
         userAnswers.push(Number(userAnswer));
-
     }
-    checkAnswers(answersB,userAnswers,questions); 
+    checkAnswers(answerKey,userAnswers,questions); 
 })
