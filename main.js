@@ -5,18 +5,22 @@ const DOMSelectors = {
     submitAmount: document.getElementById("submitAmount"),
     numberOfQuestion: document.getElementById("numberOfQuestion"),
     answerInputs: document.getElementsByClassName("answerInput"),
-
 };
 
 const questions = [];
 const userAnswers = [];
 const answersB = [];
 
+function clearAll(){
+    userAnswers.length = 0
+    questions.length = 0;
+    DOMSelectors.box.innerHTML = "";
+    DOMSelectors.result.innerHTML = ""
+}
+
 function getNumber(){
     let numberA = Math.floor(Math.random() * 1000);
     let numberB = Math.floor(Math.random() * 1000);
-    // console.log("what is", numberA, "+", numberB);
-
     return {
         numberA: numberA,
         numberB: numberB,
@@ -24,42 +28,31 @@ function getNumber(){
 };
 
 function display(data){
-    // console.log(data.numberA);
     DOMSelectors.box.insertAdjacentHTML("beforeend", `What is ${data.numberA} + ${data.numberB}`)
-
     DOMSelectors.box.insertAdjacentHTML("beforeend", ` 
     <input type="text" class="answerInput" placeholder="Answer"> 
     <br><br>`);
-
     let answers = data.numberA + data.numberB
     answersB.push(Number(answers));
 };
 
 
 DOMSelectors.submitAmount.addEventListener("click", function () {
+    clearAll()
     numOfQ = DOMSelectors.numberOfQuestion.value;
-    
-    userAnswers.length = 0
-    questions.length = 0;
-    DOMSelectors.box.innerHTML = "";
-    
-
     for (let i = 0; i < numOfQ; i++) {
         const num = getNumber();
         questions.push(num);
     }
-
     questions.forEach((question) => {
         display(question);
     });
-
     return questions;
 });
 
 let checkAnswers = function (arr1, arr2, arr3) {
     let wrong = 0;
     let right = 0;
-
     for (let i = 0; i < arr1.length; i++) {
         if (arr1[i] === arr2[i]) {
             right++;
@@ -75,23 +68,15 @@ let checkAnswers = function (arr1, arr2, arr3) {
             );
         }
     }
-
     DOMSelectors.result.insertAdjacentHTML("beforeend", `you got ${right} right and ${wrong} wrong`);
 };
 
 DOMSelectors.submit.addEventListener("click", function(){  
+    DOMSelectors.result.innerHTML = ""
     for (let i = 0; i < DOMSelectors.answerInputs.length; i++) {
         let userAnswer = DOMSelectors.answerInputs[i].value;
         userAnswers.push(Number(userAnswer));
 
     }
-
-    // console.log(answersB);
-    // console.log(userAnswers);
-
-
-    checkAnswers(answersB,userAnswers,questions);
+    checkAnswers(answersB,userAnswers,questions); 
 })
-
-
-
