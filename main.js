@@ -32,7 +32,7 @@ function display(data){
     <br><br>`);
 
     let answers = data.numberA + data.numberB
-    answersB.push(answers);
+    answersB.push(Number(answers));
 };
 
 
@@ -82,7 +82,7 @@ let checkAnswers = function (arr1, arr2, arr3) {
 DOMSelectors.submit.addEventListener("click", function(){  
     for (let i = 0; i < DOMSelectors.answerInputs.length; i++) {
         let userAnswer = DOMSelectors.answerInputs[i].value;
-        userAnswers.push(userAnswer);
+        userAnswers.push(Number(userAnswer));
 
     }
 
