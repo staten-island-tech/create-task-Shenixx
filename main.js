@@ -12,9 +12,9 @@ const userAnswers = [];
 const answerKey = [];
 
 function clearAll(){
-    userAnswers.length = 0;
-    questions.length = 0;
-    answerKey.length = 0;
+    userAnswers = []
+    questions = []
+    answerKey = []
     DOMSelectors.box.innerHTML = "";
     DOMSelectors.result.innerHTML = "";
 }
@@ -70,7 +70,7 @@ let checkAnswers = function (arr1, arr2, arr3) {
         }
     }
     let percent = right/ (right + wrong) * 100
-    DOMSelectors.result.insertAdjacentHTML("beforeend", `You got ${right} right and ${wrong} wrong with ${percent}%`);
+    DOMSelectors.result.insertAdjacentHTML("beforeend", `You got ${right} right and ${wrong} wrong with a ${percent}% accuracy`);
 };
 
 DOMSelectors.submit.addEventListener("click", function(){  
